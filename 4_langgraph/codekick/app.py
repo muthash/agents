@@ -1,22 +1,16 @@
 import traceback
 import gradio as gr
 from graph import agent
+from orchestrator import run_with_orchestration
+
 
 def run_agent(user_prompt: str, recursion_limit: int):
-    """
-    Runs the existing agent.invoke call and returns a string suitable for display.
-    """
-    if not user_prompt:
-        return "No prompt provided."
+    resp = run_with_orchestration(user_prompt, recursion_limit=recursion_limit, agent_kwargs={"temperature": 0})
+    # Build a display string:
+    if not resp.get("ok"):
+        return f"Agent output: {resp.get('agent_raw')}\n\nError: {resp.get('error')}\nTool result: {resp.get('tool_result')}"
+    return f"Agent output: {resp.get('agent_raw')}\n\nTool result: {resp.get('tool_result')}"
 
-    try:
-        result = agent.invoke(
-            {"user_prompt": user_prompt},
-            {"recursion_limit": recursion_limit}
-        )
-        return f"Final State:\n{result}"
-    except Exception:
-        return "Error:\n" + traceback.format_exc()
 
 def build_ui():
     with gr.Blocks(title="Engineering Project Planner") as ui:
@@ -34,7 +28,6 @@ def build_ui():
         recursion = gr.Number(value=100, label="Recursion limit", precision=0)
         output = gr.Textbox(label="Output", interactive=False, lines=22)
 
-        # Hook up button (also run when user presses enter in the textbox)
         run_btn.click(fn=run_agent, inputs=[prompt, recursion], outputs=output)
         prompt.submit(fn=run_agent, inputs=[prompt, recursion], outputs=output)
 

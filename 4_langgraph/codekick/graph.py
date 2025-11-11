@@ -94,7 +94,6 @@ def architect_agent(state: dict) -> dict:
         taskplan = taskplan_obj
 
     taskplan.plan = plan
-    print(taskplan.model_dump_json())
     return {"task_plan": taskplan}
 
 
