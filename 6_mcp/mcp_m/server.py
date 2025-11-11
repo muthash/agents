@@ -9,9 +9,7 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("date-time-mcp")
 
-# ------------------------------------------------------------
 # Date/time tools
-# ------------------------------------------------------------
 @mcp.tool()
 def current_date() -> dict:
     "Return today's date in ISO 8601 format (YYYY-MM-DD)."
@@ -88,9 +86,6 @@ def next_weekday(reference_date: str, weekday_name: str) -> dict:
     next_date = d + timedelta(days=days_ahead)
     return {"next_date": next_date.isoformat()}
 
-# ------------------------------------------------------------
-# Explicit registry so manifest is always populated
-# ------------------------------------------------------------
 TOOL_FUNCS: List[Callable] = [
     current_date,
     current_time,
@@ -106,9 +101,8 @@ TOOL_FUNCS: List[Callable] = [
 ]
 TOOL_MAP = {fn.__name__: fn for fn in TOOL_FUNCS}
 
-# ------------------------------------------------------------
+
 # FastAPI app
-# ------------------------------------------------------------
 app = FastAPI(title="Date/Time MCP Server (explicit registry)")
 
 class Payload(RootModel[Dict[str, Any]]):

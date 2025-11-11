@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# client.py
 import argparse
 import json
 import sys
