@@ -38,23 +38,15 @@ with gr.Blocks(title="Sidekick", theme=gr.themes.Default(primary_hue="emerald"))
         with gr.Row():
             message = gr.Textbox(show_label=False, placeholder="Your request to the Sidekick")
         with gr.Row():
-            success_criteria = gr.Textbox(
-                show_label=False, placeholder="What are your success critiera?"
-            )
+            success_criteria = gr.Textbox(show_label=False, placeholder="What are your success critiera?")
     with gr.Row():
         reset_button = gr.Button("Reset", variant="stop")
         go_button = gr.Button("Go!", variant="primary")
 
     ui.load(setup, [], [sidekick])
-    message.submit(
-        process_message, [sidekick, message, success_criteria, chatbot], [chatbot, sidekick]
-    )
-    success_criteria.submit(
-        process_message, [sidekick, message, success_criteria, chatbot], [chatbot, sidekick]
-    )
-    go_button.click(
-        process_message, [sidekick, message, success_criteria, chatbot], [chatbot, sidekick]
-    )
+    message.submit(process_message, [sidekick, message, success_criteria, chatbot], [chatbot, sidekick])
+    success_criteria.submit(process_message, [sidekick, message, success_criteria, chatbot], [chatbot, sidekick])
+    go_button.click(process_message, [sidekick, message, success_criteria, chatbot], [chatbot, sidekick])
     reset_button.click(reset, [], [message, success_criteria, chatbot, sidekick])
 
 

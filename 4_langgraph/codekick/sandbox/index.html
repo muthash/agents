@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="calculator" class="calculator">
+        <div id="display" class="display" aria-live="polite"></div>
+        <div class="buttons">
+            <!-- Row 1 -->
+            <button id="clear" data-action="clear" role="button">C</button>
+            <button id="backspace" data-action="backspace" role="button">⌫</button>
+            <button data-action="operator" data-value="/" role="button">/</button>
+            <button data-action="operator" data-value="*" role="button">*</button>
+            <!-- Row 2 -->
+            <button data-action="digit" data-value="7" role="button">7</button>
+            <button data-action="digit" data-value="8" role="button">8</button>
+            <button data-action="digit" data-value="9" role="button">9</button>
+            <button data-action="operator" data-value="-" role="button">-</button>
+            <!-- Row 3 -->
+            <button data-action="digit" data-value="4" role="button">4</button>
+            <button data-action="digit" data-value="5" role="button">5</button>
+            <button data-action="digit" data-value="6" role="button">6</button>
+            <button data-action="operator" data-value="+" role="button">+</button>
+            <!-- Row 4 -->
+            <button data-action="digit" data-value="1" role="button">1</button>
+            <button data-action="digit" data-value="2" role="button">2</button>
+            <button data-action="digit" data-value="3" role="button">3</button>
+            <button id="equals" data-action="equals" role="button">=</button>
+            <!-- Row 5 -->
+            <button data-action="digit" data-value="0" role="button">0</button>
+            <button data-action="decimal" data-value="." role="button">.</button>
+        </div>
+    </div>
+    <script defer src="script.js"></script>
+</body>
+</html>
